@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Project: Kalkulator Nilai Mahasiswa</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 20px auto;
+            max-width: 800px;
+            padding: 0 15px;
+            color: #333;
+            line-height: 1.5;
+        }
+        header {
+            margin-bottom: 15px;
+        }
+        h1 {
+            color: #1f5faa;
+            margin-bottom: 5px;
+        }
+        nav {
+            margin: 15px 0;
+            padding: 8px 0;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+        nav a {
+            color: #1f5faa;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .form-box {
+            background: #fafafa;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        table td {
+            padding: 8px 5px;
+        }
+        input[type="number"] {
+            padding: 6px;
+            width: 100px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        button {
+            padding: 7px 14px;
+            background: #1f5faa;
+            color: white;
+            border: 1px solid #1f5faa;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-right: 6px;
+        }
+        button:hover {
+            background: #164785;
+        }
+        .btn-reset {
+            background: #666;
+            border-color: #666;
+        }
+        .btn-reset:hover {
+            background: #444;
+        }
+        .btn-skenario {
+            background: #e7e7e7;
+            color: #333;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+        .btn-skenario:hover {
+            background: #d4d4d4;
+        }
+        .hasil-box {
+            background: #fff;
+            border: 1px solid #1f5faa;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+            display: none;
+        }
+        .hasil-box h3 {
+            margin-top: 0;
+            color: #1f5faa;
+        }
+        .pesan-error {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
+        }
+        footer {
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+            font-size: 13px;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Mini Project: Kalkulator Nilai Mahasiswa</h1>
+        <p>Nama: Angger Cakra Wicaksono | NIM: 312510054 | Kelas: I253A</p>
+    </header>
+
+    <nav>
+        <a href="../index.html">Halaman Utama</a> |
+        <a href="index.html">Latihan Modul (1-8)</a> |
+        <a href="kalkulator.html">Kalkulator Nilai (Mini Project)</a> |
+        <a href="eksperimen.html">Eksperimen Mandiri</a>
+    </nav>
+
+    <div class="form-box">
+        <h3>Form Input Komponen Nilai</h3>
+        <p>Ketentuan bobot: Tugas 30%, UTS 30%, UAS 40% (Rentang nilai valid: 0 - 100)</p>
+
+        <form id="formKalkulator" onsubmit="prosesHitung(event)">
+            <table>
+                <tr>
+                    <td style="width: 180px;"><label for="nilaiTugas">Nilai Tugas (30%):</label></td>
+                    <td><input type="number" id="nilaiTugas" min="0" max="100" step="any" required></td>
+                </tr>
+                <tr>
+                    <td><label for="nilaiUTS">Nilai UTS (30%):</label></td>
+                    <td><input type="number" id="nilaiUTS" min="0" max="100" step="any" required></td>
+                </tr>
+                <tr>
+                    <td><label for="nilaiUAS">Nilai UAS (40%):</label></td>
+                    <td><input type="number" id="nilaiUAS" min="0" max="100" step="any" required></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button type="submit">Hitung Nilai Akhir</button>
+                        <button type="button" class="btn-reset" onclick="resetForm()">Reset</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <p id="errorNotif" class="pesan-error"></p>
+
+        <div style="margin-top: 15px; padding-top: 10px; border-top: 1px dashed #ccc;">
+            <strong>Uji Coba Tiga Skenario Nilai Berbeda:</strong><br>
+            <button type="button" class="btn-skenario" onclick="isiSkenario(85, 80, 90)">Skenario 1 (Tugas: 85, UTS: 80, UAS: 90)</button>
+            <button type="button" class="btn-skenario" onclick="isiSkenario(65, 60, 60)">Skenario 2 (Tugas: 65, UTS: 60, UAS: 60)</button>
+            <button type="button" class="btn-skenario" onclick="isiSkenario(40, 45, 40)">Skenario 3 (Tugas: 40, UTS: 45, UAS: 40)</button>
+        </div>
+
+        <div id="hasilPanel" class="hasil-box">
+            <h3>Hasil Perhitungan:</h3>
+            <p>Nilai Akhir: <strong id="tampilAkhir">0</strong></p>
+            <p>Predikat: <strong id="tampilPredikat">-</strong></p>
+            <p>Status: <strong id="tampilStatus">-</strong></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Praktikum Pemrograman Web - Universitas Pelita Bangsa</p>
+    </footer>
+
+    <script>
+        // Function perhitungan nilai akhir
+        function hitungNilaiAkhir(tugas, uts, uas) {
+            return (tugas * 0.30) + (uts * 0.30) + (uas * 0.40);
+        }
+
+        // Function penentuan predikat
+        function tentukanPredikat(nilai) {
+            if (nilai >= 85) return "A";
+            if (nilai >= 75) return "B";
+            if (nilai >= 60) return "C";
+            if (nilai >= 50) return "D";
+            return "E";
+        }
+
+        // Function status kelulusan
+        function tentukanStatus(nilai) {
+            return nilai >= 60 ? "Lulus" : "Belum lulus";
+        }
+
+        // Function validasi rentang 0 - 100
+        function validasiNilai(nilai, nama) {
+            if (isNaN(nilai) || nilai < 0 || nilai > 100) {
+                return "Nilai " + nama + " harus berada di antara 0 sampai 100.";
+            }
+            return null;
+        }
+
+        // Function proses hitung dan tampilan hasil
+        function prosesHitung(event) {
+            if (event) event.preventDefault();
+
+            const tugas = parseFloat(document.getElementById("nilaiTugas").value);
+            const uts = parseFloat(document.getElementById("nilaiUTS").value);
+            const uas = parseFloat(document.getElementById("nilaiUAS").value);
+
+            const errEl = document.getElementById("errorNotif");
+            errEl.style.display = "none";
+            errEl.textContent = "";
+
+            const errTugas = validasiNilai(tugas, "Tugas");
+            const errUTS = validasiNilai(uts, "UTS");
+            const errUAS = validasiNilai(uas, "UAS");
+
+            if (errTugas || errUTS || errUAS) {
+                errEl.textContent = errTugas || errUTS || errUAS;
+                errEl.style.display = "block";
+                return;
+            }
+
+            const akhir = hitungNilaiAkhir(tugas, uts, uas);
+            const predikat = tentukanPredikat(akhir);
+            const status = tentukanStatus(akhir);
+
+            // Tampilkan ke halaman HTML
+            document.getElementById("tampilAkhir").textContent = akhir.toFixed(2);
+            document.getElementById("tampilPredikat").textContent = predikat;
+            document.getElementById("tampilStatus").textContent = status;
+            document.getElementById("hasilPanel").style.display = "block";
+
+            // Tampilkan juga ke Console sesuai modul
+            console.log("Nilai akhir:", akhir.toFixed(2));
+            console.log("Predikat:", predikat);
+            console.log("Status:", status);
+        }
+
+        function isiSkenario(tugas, uts, uas) {
+            document.getElementById("nilaiTugas").value = tugas;
+            document.getElementById("nilaiUTS").value = uts;
+            document.getElementById("nilaiUAS").value = uas;
+            prosesHitung();
+        }
+
+        function resetForm() {
+            document.getElementById("formKalkulator").reset();
+            document.getElementById("hasilPanel").style.display = "none";
+            document.getElementById("errorNotif").style.display = "none";
+        }
+    </script>
+</body>
+</html>

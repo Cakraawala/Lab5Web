@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eksperimen Mandiri Praktikum 5</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 20px auto;
+            max-width: 850px;
+            padding: 0 15px;
+            color: #333;
+            line-height: 1.5;
+        }
+        header {
+            margin-bottom: 15px;
+        }
+        h1 {
+            color: #1f5faa;
+            margin-bottom: 5px;
+        }
+        nav {
+            margin: 15px 0;
+            padding: 8px 0;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+        nav a {
+            color: #1f5faa;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .box-eksperimen {
+            background: #fafafa;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .box-eksperimen h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            color: #333;
+        }
+        button {
+            padding: 6px 12px;
+            background: #1f5faa;
+            color: white;
+            border: 1px solid #1f5faa;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+        button:hover {
+            background: #164785;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 5px 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        table {
+            border-collapse: collapse;
+            margin-top: 10px;
+            width: 100%;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 6px 10px;
+            text-align: center;
+        }
+        th {
+            background: #eee;
+        }
+        .output-box {
+            background: #fff;
+            border: 1px dashed #aaa;
+            padding: 10px;
+            margin-top: 10px;
+            font-family: Consolas, monospace;
+            font-size: 13px;
+        }
+        .error-msg {
+            color: red;
+            font-size: 12px;
+            display: none;
+            margin-top: 3px;
+        }
+        .toggle-box {
+            background: #eef4fb;
+            border: 1px solid #bcd4ee;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+        footer {
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+            font-size: 13px;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Eksperimen Mandiri Praktikum 5</h1>
+        <p>Nama: Angger Cakra Wicaksono | NIM: 312510054 | Kelas: I253A</p>
+    </header>
+
+    <nav>
+        <a href="../index.html">Halaman Utama</a> |
+        <a href="index.html">Latihan Modul (1-8)</a> |
+        <a href="kalkulator.html">Kalkulator Nilai (Mini Project)</a> |
+        <a href="eksperimen.html">Eksperimen Mandiri</a>
+    </nav>
+
+    <!-- 1. Latihan 3 dengan prompt -->
+    <div class="box-eksperimen">
+        <h3>1. Latihan 3 dengan Input Nilai via Prompt</h3>
+        <p>Memasukkan dua nilai angka menggunakan dialog prompt dan mengonversinya menjadi number:</p>
+        <button type="button" onclick="latihan3Prompt()">Jalankan Input Prompt</button>
+        <div class="output-box" id="outPromptAritmetika">
+            Klik tombol di atas untuk memasukkan dua bilangan melalui prompt.
+        </div>
+    </div>
+
+    <!-- 2. Perulangan tabel perkalian angka 7 -->
+    <div class="box-eksperimen">
+        <h3>2. Perulangan Tabel Perkalian Angka 7 (1 sampai 10)</h3>
+        <p>Menampilkan tabel perkalian angka 7 menggunakan perulangan for loop:</p>
+        <button type="button" onclick="buatTabelPerkalian7()">Tampilkan Tabel Perkalian 7</button>
+        <div id="wadahTabel7"></div>
+    </div>
+
+    <!-- 3. Function cekGenap(angka) boolean -->
+    <div class="box-eksperimen">
+        <h3>3. Function cekGenap(angka)</h3>
+        <p>Function yang mengembalikan nilai boolean true jika angka genap, dan false jika ganjil.</p>
+        <label for="inputAngka">Masukkan angka:</label>
+        <input type="number" id="inputAngka" placeholder="Contoh: 14">
+        <button type="button" onclick="ujiCekGenap()">Periksa</button>
+        <p id="hasilCekGenap" style="margin-top: 8px; font-weight: bold;"></p>
+    </div>
+
+    <!-- 4. Validasi form kolom tidak boleh kosong -->
+    <div class="box-eksperimen">
+        <h3>4. Validasi Form Wajib Diisi (Anti Kolom Kosong)</h3>
+        <form onsubmit="validasiForm(event)">
+            <div>
+                <label for="formNama">Nama:</label><br>
+                <input type="text" id="formNama" style="width: 250px;">
+                <div id="errNama" class="error-msg">Nama tidak boleh kosong!</div>
+            </div>
+            <div style="margin-top: 8px;">
+                <label for="formEmail">Email:</label><br>
+                <input type="text" id="formEmail" style="width: 250px;">
+                <div id="errEmail" class="error-msg">Email tidak boleh kosong!</div>
+            </div>
+            <button type="submit" style="margin-top: 10px;">Kirim Data</button>
+        </form>
+        <p id="suksesKirim" style="color: green; font-weight: bold; margin-top: 10px;"></p>
+    </div>
+
+    <!-- 5. Perluasan menu makanan Latihan 8 -->
+    <div class="box-eksperimen">
+        <h3>5. Perluasan Latihan 8 (Menambah Pilihan Menu dan Harga)</h3>
+        <p>Daftar menu diperluas dengan tambahan menu baru (Nasi Putih dan Es Teh Manis):</p>
+        <label><input type="checkbox" class="menu-tambahan" value="5000"> Ayam Goreng - Rp5.000</label><br>
+        <label><input type="checkbox" class="menu-tambahan" value="500"> Tempe - Rp500</label><br>
+        <label><input type="checkbox" class="menu-tambahan" value="2500"> Telur Dadar - Rp2.500</label><br>
+        <label><input type="checkbox" class="menu-tambahan" value="3000"> Nasi Putih - Rp3.000</label><br>
+        <label><input type="checkbox" class="menu-tambahan" value="3000"> Es Teh Manis - Rp3.000</label><br>
+        <p style="font-size: 16px; font-weight: bold; margin-top: 10px;">
+            Total: Rp<span id="totalTambahan">0</span>
+        </p>
+    </div>
+
+    <!-- 6. Tombol hide / show elemen HTML -->
+    <div class="box-eksperimen">
+        <h3>6. Tombol Sembunyikan dan Tampilkan Elemen HTML</h3>
+        <p>Klik tombol di bawah ini untuk menyembunyikan atau menampilkan kotak elemen di bawahnya:</p>
+        <button type="button" id="btnToggle" onclick="toggleElemen()">Sembunyikan Elemen</button>
+        <div id="elemenKotak" class="toggle-box">
+            <strong>Kotak Informasi:</strong> Elemen ini dapat di-hide atau di-show menggunakan manipulasi JavaScript pada properti style.display.
+        </div>
+    </div>
+
+    <footer>
+        <p>Praktikum Pemrograman Web - Universitas Pelita Bangsa</p>
+    </footer>
+
+    <script>
+        // 1. Latihan 3 dengan prompt
+        function latihan3Prompt() {
+            const inputA = prompt("Masukkan angka pertama (a):", "9");
+            if (inputA === null) return;
+            const inputB = prompt("Masukkan angka kedua (b):", "4");
+            if (inputB === null) return;
+
+            const a = Number(inputA);
+            const b = Number(inputB);
+
+            if (isNaN(a) || isNaN(b) || inputA.trim() === "" || inputB.trim() === "") {
+                alert("Input harus berupa bilangan angka valid!");
+                return;
+            }
+
+            const out = document.getElementById("outPromptAritmetika");
+            out.innerHTML =
+                "Angka a = " + a + ", b = " + b + "<br>" +
+                "Penjumlahan: " + (a + b) + "<br>" +
+                "Pengurangan: " + (a - b) + "<br>" +
+                "Perkalian: " + (a * b) + "<br>" +
+                "Pembagian: " + (b !== 0 ? (a / b).toFixed(2) : "Tidak dapat dibagi nol") + "<br>" +
+                "Modulus: " + (a % b);
+        }
+
+        // 2. Tabel perkalian 7 dengan loop for
+        function buatTabelPerkalian7() {
+            let tabelHtml = "<table><tr><th>No</th><th>Perkalian</th><th>Hasil</th></tr>";
+            for (let i = 1; i <= 10; i++) {
+                tabelHtml += "<tr><td>" + i + "</td><td>7 x " + i + "</td><td>" + (7 * i) + "</td></tr>";
+            }
+            tabelHtml += "</table>";
+            document.getElementById("wadahTabel7").innerHTML = tabelHtml;
+        }
+
+        // 3. Function cekGenap boolean
+        function cekGenap(angka) {
+            return angka % 2 === 0;
+        }
+
+        function ujiCekGenap() {
+            const val = document.getElementById("inputAngka").value;
+            if (val.trim() === "") {
+                alert("Masukkan angka terlebih dahulu.");
+                return;
+            }
+            const angka = Number(val);
+            const hasil = cekGenap(angka);
+            document.getElementById("hasilCekGenap").textContent =
+                "Angka " + angka + " -> cekGenap(" + angka + ") menghasilkan: " + hasil + " (" + (hasil ? "Genap" : "Ganjil") + ")";
+        }
+
+        // 4. Validasi form
+        function validasiForm(event) {
+            event.preventDefault();
+            const nama = document.getElementById("formNama").value;
+            const email = document.getElementById("formEmail").value;
+            const errNama = document.getElementById("errNama");
+            const errEmail = document.getElementById("errEmail");
+            const sukses = document.getElementById("suksesKirim");
+
+            let valid = true;
+            if (nama.trim() === "") {
+                errNama.style.display = "block";
+                valid = false;
+            } else {
+                errNama.style.display = "none";
+            }
+
+            if (email.trim() === "") {
+                errEmail.style.display = "block";
+                valid = false;
+            } else {
+                errEmail.style.display = "none";
+            }
+
+            if (valid) {
+                sukses.textContent = "Form berhasil dikirim. Terima kasih, " + nama + "!";
+            } else {
+                sukses.textContent = "";
+            }
+        }
+
+        // 5. Perluasan menu checkbox
+        const menuTambahan = document.querySelectorAll(".menu-tambahan");
+        menuTambahan.forEach(function (item) {
+            item.addEventListener("change", hitungTotalTambahan);
+        });
+
+        function hitungTotalTambahan() {
+            let total = 0;
+            menuTambahan.forEach(function (item) {
+                if (item.checked) total += Number(item.value);
+            });
+            document.getElementById("totalTambahan").textContent = total.toLocaleString("id-ID");
+        }
+
+        // 6. Tombol toggle
+        function toggleElemen() {
+            const kotak = document.getElementById("elemenKotak");
+            const btn = document.getElementById("btnToggle");
+
+            if (kotak.style.display === "none") {
+                kotak.style.display = "block";
+                btn.textContent = "Sembunyikan Elemen";
+            } else {
+                kotak.style.display = "none";
+                btn.textContent = "Tampilkan Elemen";
+            }
+        }
+    </script>
+</body>
+</html>

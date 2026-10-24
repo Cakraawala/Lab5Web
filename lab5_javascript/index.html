@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praktikum 5 - JavaScript Dasar dan Manipulasi HTML</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 20px auto;
+            max-width: 900px;
+            padding: 0 15px;
+            color: #333;
+            line-height: 1.5;
+        }
+        header {
+            margin-bottom: 15px;
+        }
+        h1 {
+            color: #1f5faa;
+            margin-bottom: 5px;
+        }
+        nav {
+            margin: 15px 0;
+            padding: 8px 0;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+        nav a {
+            color: #1f5faa;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .box-latihan {
+            background: #fafafa;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .box-latihan h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        button {
+            padding: 6px 12px;
+            background: #1f5faa;
+            color: white;
+            border: 1px solid #1f5faa;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 5px;
+            margin-right: 5px;
+        }
+        button:hover {
+            background: #164785;
+        }
+        input[type="number"], input[type="text"] {
+            padding: 5px 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .output-box {
+            background: #fff;
+            border: 1px dashed #aaa;
+            padding: 10px;
+            margin-top: 10px;
+            font-family: Consolas, monospace;
+            font-size: 13px;
+        }
+        footer {
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+            font-size: 13px;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Praktikum 5: JavaScript Dasar dan Manipulasi HTML</h1>
+        <p>Nama: Angger Cakra Wicaksono | NIM: 312510054 | Kelas: I253A</p>
+    </header>
+
+    <nav>
+        <a href="../index.html">Halaman Utama</a> |
+        <a href="index.html">Latihan Modul (1-8)</a> |
+        <a href="kalkulator.html">Kalkulator Nilai (Mini Project)</a> |
+        <a href="eksperimen.html">Eksperimen Mandiri</a>
+    </nav>
+
+    <!-- Latihan 1: Menampilkan output -->
+    <div class="box-latihan">
+        <h3>Latihan 1: Menampilkan Output</h3>
+        <p>Elemen di bawah ini konten awalnya adalah "Konten awal.", lalu diubah oleh JavaScript menggunakan properti textContent menjadi:</p>
+        <div class="output-box">
+            <p id="pesan">Konten awal.</p>
+        </div>
+        <p><small>*Pesan "Hello World" juga ditampilkan pada browser Console (tekan F12 lalu pilih menu Console).</small></p>
+    </div>
+
+    <!-- Latihan 2: Alert dan prompt -->
+    <div class="box-latihan">
+        <h3>Latihan 2: Alert dan Prompt</h3>
+        <p>Klik tombol di bawah ini untuk menguji input nama menggunakan dialog prompt dan alert:</p>
+        <button type="button" onclick="jalankanLatihan2()">Uji Prompt Nama</button>
+    </div>
+
+    <!-- Latihan 3: Function dan operasi aritmetika -->
+    <div class="box-latihan">
+        <h3>Latihan 3: Function dan Operasi Aritmetika</h3>
+        <p>Memanggil fungsi <code>operasiDasar(9, 4)</code> untuk menghitung penjumlahan, pengurangan, perkalian, pembagian, dan sisa bagi.</p>
+        <button type="button" onclick="operasiDasar(9, 4)">Jalankan operasiDasar(9, 4)</button>
+        <div class="output-box" id="logAritmetika">
+            Klik tombol di atas untuk melihat ringkasan output (hasil lengkap juga ada di Console).
+        </div>
+    </div>
+
+    <!-- Latihan 4: Seleksi kondisi if-else -->
+    <div class="box-latihan">
+        <h3>Latihan 4: Seleksi Kondisi if-else</h3>
+        <p>Meminta masukan nilai mahasiswa melalui prompt (rentang 0-100). Nilai minimal 60 dinyatakan lulus.</p>
+        <button type="button" onclick="jalankanLatihan4()">Uji Seleksi Nilai</button>
+    </div>
+
+    <!-- Latihan 5: Seleksi kondisi switch -->
+    <div class="box-latihan">
+        <h3>Latihan 5: Seleksi Kondisi switch</h3>
+        <p>Meminta masukan angka 1-5 melalui prompt dan menampilkan nama bilangan menggunakan percabangan switch.</p>
+        <button type="button" onclick="jalankanLatihan5()">Uji Pilihan Angka (1-5)</button>
+    </div>
+
+    <!-- Latihan 6: Form bilangan genap atau ganjil -->
+    <div class="box-latihan">
+        <h3>Latihan 6: Form Bilangan Genap atau Ganjil</h3>
+        <label for="bilangan">Masukkan bilangan bulat:</label>
+        <input type="number" id="bilangan" step="1">
+        <button type="button" onclick="cekBilangan()">Periksa</button>
+        <p id="hasilBilangan" style="font-weight: bold; margin-top: 10px;"></p>
+    </div>
+
+    <!-- Latihan 7: Mengubah warna halaman -->
+    <div class="box-latihan">
+        <h3>Latihan 7: Mengubah Warna Halaman</h3>
+        <p>Pilih tombol warna di bawah ini untuk mengubah warna latar belakang halaman:</p>
+        <button type="button" onclick="ubahWarnaLatar('lightgreen')" style="background: #2e7d32; border-color: #2e7d32;">Latar Hijau</button>
+        <button type="button" onclick="ubahWarnaLatar('white')" style="background: #fff; color: #333; border: 1px solid #ccc;">Latar Putih</button>
+        <button type="button" onclick="ubahWarnaLatar('lightyellow')" style="background: #fbc02d; color: #333; border-color: #fbc02d;">Latar Kuning</button>
+    </div>
+
+    <!-- Latihan 8: DOM dan checkbox menu makanan -->
+    <div class="box-latihan">
+        <h3>Latihan 8: DOM dan Checkbox Menu Makanan</h3>
+        <label><input type="checkbox" class="menu" value="5000"> Ayam Goreng - Rp5.000</label><br>
+        <label><input type="checkbox" class="menu" value="500"> Tempe - Rp500</label><br>
+        <label><input type="checkbox" class="menu" value="2500"> Telur Dadar - Rp2.500</label><br>
+        <p style="font-size: 16px; font-weight: bold; margin-top: 10px;">
+            Total: Rp<span id="total">0</span>
+        </p>
+    </div>
+
+    <footer>
+        <p>Praktikum Pemrograman Web - Universitas Pelita Bangsa</p>
+    </footer>
+
+    <!-- Menghubungkan script.js di akhir body sesuai instruksi modul -->
+    <script src="script.js"></script>
+</body>
+</html>
